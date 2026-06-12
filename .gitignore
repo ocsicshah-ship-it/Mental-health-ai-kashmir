@@ -1,8 +1,30 @@
-.env
+# Dependencies (stack TBD)
+node_modules/
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 venv/
 .pytest_cache/
-.DS_Store
+
+# Env & secrets — NEVER commit credentials or user data
+.env
+.env.*
+*.local
+
+# Sensitive: never commit real user conversations / PII / red-team data with real cases
+data/conversations/
+data/pii/
+*.user-data.json
+
+# Build / tooling
+dist/
+build/
+.cache/
+coverage/
 *.log
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp

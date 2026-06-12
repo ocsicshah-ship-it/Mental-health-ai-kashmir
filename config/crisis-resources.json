@@ -1,0 +1,244 @@
+{
+  "$schema": "./crisis-resources.schema.json",
+  "_meta": {
+    "description": "Verified crisis and support resources for the Kashmir Valley mental-health companion. This file is SAFETY-CRITICAL and MUST be bundled for offline rendering (the region experiences frequent internet shutdowns). Every change requires re-verification against the cited source.",
+    "last_verified": "2026-06-12",
+    "timezone": "Asia/Kolkata",
+    "verification_legend": {
+      "verified": "Confirmed against an authoritative/official source as of last_verified.",
+      "partial": "Service exists and is authoritative, but a specific detail (number, hours, J&K coverage, or language) is not fully confirmed.",
+      "unverified": "Listed for completeness; a key detail is unconfirmed. Do NOT present to users without re-verification."
+    },
+    "do_not_cite": [
+      {
+        "name": "KIRAN",
+        "number": "1800-599-0019",
+        "reason": "Merged into Tele-MANAS; standalone-answering status unconfirmed. Route users to Tele-MANAS 14416 instead. Never present KIRAN as an independent active line."
+      }
+    ],
+    "rendering_rules": [
+      "Always surface Tele-MANAS (14416) first for any mental-health distress.",
+      "For imminent danger to life, surface ERSS 112 first, then Tele-MANAS.",
+      "Time-gated resources (time_gated: true) MUST NOT be shown as available outside their hours; show the after_hours_fallback instead.",
+      "Never present a non-24/7 line as a crisis/after-hours option.",
+      "Match the resource's listed languages to the user's language where possible; if Urdu coverage is not 'verified', do not promise Urdu support."
+    ]
+  },
+
+  "primary_crisis": [
+    {
+      "id": "telemanas",
+      "name": "Tele-MANAS (National Tele Mental Health Programme)",
+      "name_local": { "ur": "ٹیلی مانس" },
+      "numbers": ["14416", "1-800-891-4416"],
+      "available": "24/7",
+      "time_gated": false,
+      "toll_free": true,
+      "cost": "free",
+      "languages": ["en", "hi", "ur", "ks?"],
+      "languages_note": "English + 20 regional languages including Urdu (verified). Kashmiri availability not separately confirmed.",
+      "scope": "national",
+      "jk_operator": "IMHANS-K (Institute of Mental Health and Neurosciences, Kashmir) at Government Medical College Srinagar; J&K cell launched 2022-11-04. J&K nodal officer: Dr Arshid Hussain.",
+      "confidentiality": "Calls not audio-recorded; caller number masked; unique Tele-MANAS ID assigned; 'prefer not to say' on all demographics.",
+      "chatbot_number": "9797600601",
+      "chatbot_note": "J&K Tele-MANAS chatbot (AI + two-way expert communication), launched July 2023.",
+      "source": "https://telemanas.mohfw.gov.in/home",
+      "verification": "verified",
+      "priority": 1
+    },
+    {
+      "id": "erss112",
+      "name": "Emergency Response Support System (police / fire / medical)",
+      "numbers": ["112"],
+      "available": "24/7",
+      "time_gated": false,
+      "toll_free": true,
+      "cost": "free",
+      "scope": "national",
+      "use_when": "Imminent danger to life or safety (active suicide attempt in progress, violence in progress, medical emergency).",
+      "verification": "verified",
+      "priority": 0
+    },
+    {
+      "id": "kashmir_lifeline",
+      "name": "Kashmir Lifeline",
+      "operator": "Healing Minds Foundation",
+      "operator_correction": "NOT Médecins Sans Frontières (MSF). MSF's Kashmir role was the 2015 Kashmir Mental Health Survey, a separate effort.",
+      "numbers": ["1800-180-7020"],
+      "available": "Sun–Thu 10:00–17:00 IST",
+      "time_gated": true,
+      "hours": {
+        "days": ["sun", "mon", "tue", "wed", "thu"],
+        "open": "10:00",
+        "close": "17:00",
+        "timezone": "Asia/Kolkata"
+      },
+      "after_hours_fallback": "telemanas",
+      "toll_free": true,
+      "cost": "free (works from a zero-balance phone); anonymous",
+      "languages": ["en", "ks", "ur", "hi"],
+      "scope": "kashmir",
+      "providers_note": "All care providers are Kashmiri and trauma-informed. Project of Healing Minds Foundation; clinic in Baghat, Srinagar, plus district outreach.",
+      "safety_note": "NEVER present as a 24/7 or after-hours crisis line. Outside listed hours, show Tele-MANAS instead.",
+      "source": "https://kashmirlifeline.org",
+      "verification": "verified",
+      "priority": 2
+    }
+  ],
+
+  "population_specific": [
+    {
+      "id": "childline",
+      "name": "Childline (children in need of care/protection)",
+      "numbers": ["1098"],
+      "available": "24/7",
+      "time_gated": false,
+      "toll_free": true,
+      "cost": "free",
+      "audience": "minors (under 18)",
+      "operator": "Mission Vatsalya (Ministry of Women & Child Development)",
+      "languages_note": "Urdu coverage UNVERIFIED.",
+      "scope": "national",
+      "source": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1942873",
+      "verification": "verified"
+    },
+    {
+      "id": "women_helpline",
+      "name": "Women Helpline (Sambal / Mission Shakti)",
+      "numbers": ["181"],
+      "available": "24/7",
+      "time_gated": false,
+      "toll_free": true,
+      "cost": "free",
+      "audience": "women facing violence or distress",
+      "scope": "national",
+      "jk_status": "Operational in J&K since Oct 2017 via the J&K State Resource Centre for Women; integrated with Sakhi One Stop Centres (OSCs). Access OSCs via 181.",
+      "linked": "one_stop_centres",
+      "verification": "partial",
+      "verification_note": "National line verified; precise J&K integration/coverage is partial."
+    },
+    {
+      "id": "one_stop_centres",
+      "name": "Sakhi One Stop Centres (OSC) — J&K",
+      "access_via": "181",
+      "audience": "women facing violence (medical, legal, psychosocial, shelter support)",
+      "scope": "kashmir",
+      "count_note": "Best-documented figure: 19 OSCs in J&K as of April 2022 — verify current count against the live Mission Shakti dashboard (missionshakti.wcd.gov.in) before hard-coding.",
+      "verification": "partial"
+    }
+  ],
+
+  "general_support": [
+    {
+      "id": "vandrevala",
+      "name": "Vandrevala Foundation",
+      "numbers": ["9999666555"],
+      "channels": ["call", "whatsapp"],
+      "available": "24/7/365",
+      "time_gated": false,
+      "cost": "free",
+      "languages": ["en", "hi", "ur", "+8 more"],
+      "languages_note": "11 languages including Urdu.",
+      "data_note": "Conversations are stored (per their FAQ). The older 1860-2662-345 number is outdated.",
+      "scope": "national",
+      "source": "https://www.vandrevalafoundation.com/free-counseling/contact-us",
+      "verification": "verified"
+    },
+    {
+      "id": "icall",
+      "name": "iCall (TISS)",
+      "numbers": ["9152987821"],
+      "email": "icall@tiss.edu",
+      "available": "Mon–Sat 10:00–20:00 IST",
+      "time_gated": true,
+      "hours": {
+        "days": ["mon", "tue", "wed", "thu", "fri", "sat"],
+        "open": "10:00",
+        "close": "20:00",
+        "timezone": "Asia/Kolkata"
+      },
+      "after_hours_fallback": "telemanas",
+      "cost": "free",
+      "languages_note": "Hindi/English/Marathi/Gujarati/Punjabi/Bengali/Tamil/Telugu/Malayalam/Konkani. Urdu NOT listed.",
+      "scope": "national",
+      "source": "https://tiss.ac.in/view/11/projects/icall-telephonic-counselling-service-for-individua/",
+      "verification": "verified"
+    },
+    {
+      "id": "aasra",
+      "name": "AASRA",
+      "numbers": ["9820466726", "022-27546669"],
+      "available": "24/7",
+      "time_gated": false,
+      "cost": "free",
+      "languages": ["en", "hi"],
+      "scope": "national",
+      "source": "https://www.aasra.info/contact.html",
+      "verification": "verified"
+    }
+  ],
+
+  "deaddiction": [
+    {
+      "id": "nasha_mukti",
+      "name": "Nasha Mukti (de-addiction) Helpline",
+      "numbers": ["1800-11-0031"],
+      "available": "24/7",
+      "cost": "free",
+      "scope": "national",
+      "verification": "verified"
+    },
+    {
+      "id": "manas_ncb",
+      "name": "MANAS / NCB national anti-narcotics helpline",
+      "numbers": ["1933"],
+      "scope": "national",
+      "verification": "verified"
+    },
+    {
+      "id": "imhans_deaddiction",
+      "name": "IMHANS Drug De-Addiction Centre (CGHU at SMHS Hospital, Karan Nagar, Srinagar)",
+      "services": ["inpatient (20 beds)", "outpatient", "OST", "free medicines via AIIMS New Delhi Drug Treatment Clinic"],
+      "scope": "kashmir",
+      "note": "Addiction Treatment Facilities (ATFs) at GMC Srinagar, Anantnag, and Handwara. De-addiction OPD in all 20 districts; IPD in all 9 GMCs.",
+      "verification": "verified"
+    }
+  ],
+
+  "clinical_services": [
+    {
+      "id": "imhans",
+      "name": "IMHANS — Institute of Mental Health and Neurosciences, Kashmir",
+      "affiliation": "Psychiatry department of Government Medical College (GMC) Srinagar",
+      "sites": [
+        "100-bed IMHANS, Rainawari, Srinagar",
+        "30-bed Community General Hospital Unit (CGHU) within the SMHS Hospital complex, Karan Nagar"
+      ],
+      "opd_hours": "10:00–16:00 IST, plus 24x7 emergency services",
+      "schemes": ["AB-PMJAY (golden card)"],
+      "scope": "kashmir",
+      "verification": "verified"
+    }
+  ],
+
+  "legal_aid": [
+    {
+      "id": "nalsa",
+      "name": "NALSA national legal aid helpline",
+      "numbers": ["15100"],
+      "available": "24/7",
+      "languages_note": "10 languages.",
+      "scope": "national",
+      "source": "https://jammukashmir.nalsa.gov.in/",
+      "verification": "verified"
+    },
+    {
+      "id": "jkslsa",
+      "name": "J&K State Legal Services Authority (JKSLSA) helpline",
+      "numbers": ["1516"],
+      "scope": "kashmir",
+      "source": "https://www.jkslsa.gov.in/contact.php",
+      "verification": "verified"
+    }
+  ]
+}

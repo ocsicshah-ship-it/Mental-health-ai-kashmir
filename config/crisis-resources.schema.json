@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://growbros-kashmir/config/crisis-resources.schema.json",
+  "title": "Crisis Resources",
+  "description": "Schema for the safety-critical, offline-cacheable crisis/support resource directory.",
+  "type": "object",
+  "required": ["_meta", "primary_crisis"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "_meta": {
+      "type": "object",
+      "required": ["last_verified", "verification_legend", "rendering_rules"],
+      "properties": {
+        "description": { "type": "string" },
+        "last_verified": { "type": "string", "format": "date" },
+        "timezone": { "type": "string" },
+        "verification_legend": { "type": "object" },
+        "do_not_cite": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "reason"],
+            "properties": {
+              "name": { "type": "string" },
+              "number": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "rendering_rules": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "patternProperties": {
+    "^(primary_crisis|population_specific|general_support|deaddiction|clinical_services|legal_aid)$": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/resource" }
+    }
+  },
+  "definitions": {
+    "resource": {
+      "type": "object",
+      "required": ["id", "name", "verification"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "name": { "type": "string" },
+        "name_local": { "type": "object" },
+        "operator": { "type": "string" },
+        "numbers": { "type": "array", "items": { "type": "string" } },
+        "channels": { "type": "array", "items": { "type": "string" } },
+        "available": { "type": "string" },
+        "time_gated": { "type": "boolean" },
+        "hours": {
+          "type": "object",
+          "required": ["days", "open", "close", "timezone"],
+          "properties": {
+            "days": {
+              "type": "array",
+              "items": { "enum": ["sun", "mon", "tue", "wed", "thu", "fri", "sat"] }
+            },
+            "open": { "type": "string", "pattern": "^[0-2][0-9]:[0-5][0-9]$" },
+            "close": { "type": "string", "pattern": "^[0-2][0-9]:[0-5][0-9]$" },
+            "timezone": { "type": "string" }
+          }
+        },
+        "after_hours_fallback": { "type": "string", "description": "id of a 24/7 resource to show outside hours" },
+        "toll_free": { "type": "boolean" },
+        "cost": { "type": "string" },
+        "languages": { "type": "array", "items": { "type": "string" } },
+        "scope": { "enum": ["national", "kashmir"] },
+        "verification": { "enum": ["verified", "partial", "unverified"] },
+        "source": { "type": "string" },
+        "priority": { "type": "integer" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "time_gated": { "const": true } }, "required": ["time_gated"] },
+          "then": { "required": ["hours", "after_hours_fallback"] }
+        }
+      ]
+    }
+  }
+}
