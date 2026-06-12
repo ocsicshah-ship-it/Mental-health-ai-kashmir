@@ -37,8 +37,12 @@ pytest                                   # run tests (no API key needed)
 - Privacy first: never add server-side storage/logging of conversation content
   without explicit instruction.
 - Safety: do not weaken or remove crisis detection or the helpline surfacing.
-  Helpline numbers (Tele-MANAS 14416 / 1800-891-4416, Kiran 1800-599-0019)
-  must remain accurate — verify before changing.
+  Canonical helpline data lives in `config/crisis-resources.json`; corrections
+  that must never regress are in `docs/corrections-register.md` (e.g. KIRAN is
+  merged into Tele-MANAS — never list it as a standalone line; Kashmir Lifeline
+  is time-gated Sun–Thu 10am–5pm).
+- The production spec lives in `prompts/system-prompt.md`, `safety/`, `consent/`
+  and `docs/` — treat those as the source of truth; `app/` is a prototype.
 - The system prompt must keep: not-a-therapist disclaimer, crisis protocol,
   cultural/faith sensitivity, multilingual support (English/Urdu/Hindi/Kashmiri).
 - Python 3.10+, type hints, pydantic models for all API I/O.

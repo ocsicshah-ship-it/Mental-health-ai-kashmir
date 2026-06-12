@@ -23,10 +23,12 @@ CRISIS_PATTERNS = [
 
 _CRISIS_RE = re.compile("|".join(CRISIS_PATTERNS), re.IGNORECASE)
 
+# Verified per docs/corrections-register.md — KIRAN merged into Tele-MANAS,
+# do NOT list it as a standalone line. Canonical list: config/crisis-resources.json.
 HELPLINES = [
     {"name": "Tele-MANAS (24x7, free, Urdu/Hindi/English)", "phone": "14416"},
     {"name": "Tele-MANAS toll-free", "phone": "1800-891-4416"},
-    {"name": "Kiran Helpline (24x7)", "phone": "1800-599-0019"},
+    {"name": "Emergency (ERSS)", "phone": "112"},
 ]
 
 
